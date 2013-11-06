@@ -39,9 +39,15 @@ while action do
 			pv.each { |s|
 				s = s.split("-")
 				next if s[0] != tk
+				if pk == "IN" then
+					val = STDIN.getc
+					vals[pk] = if val.nil? then 0 else val.ord end
+				end
 				active = false if s[1].nil? && !vals[pk].nil? && vals[pk] > 0
 				active = false if !s[1].nil? && (vals[pk].nil? || vals[pk] < s[1].to_i)
+				break unless active
 			}
+			break unless active
 		}
 		action = true if active
 		next if !active
